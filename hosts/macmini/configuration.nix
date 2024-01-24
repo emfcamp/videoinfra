@@ -14,7 +14,7 @@
       isNormalUser = true;
       extraGroups = [ "wheel" ];
     };
-    taneb = {
+    voc = {
       isNormalUser = true;
       extraGroups = [ "wheel" ];
     };
