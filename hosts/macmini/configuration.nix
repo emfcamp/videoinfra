@@ -9,9 +9,15 @@
 
   time.timeZone = "Europe/London";
 
-  users.users.samw = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
+  users.users = {
+    samw = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
+    taneb = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" ];
+    };
   };
 
   environment.systemPackages = with pkgs; [

@@ -21,7 +21,7 @@
             services.sshd.enable = true;
             services.tailscale = {
               enable = true;
-              extraUpFlags = [ "--ssh" "--auth-key=tskey-auth-keGMqf2CNTRL-78FqMr8gSfGLNace1ZSvfGMoLzYHKXas" ];
+              extraUpFlags = [ "--ssh" ];
             };
             services.irccat = {
               enable = true;
