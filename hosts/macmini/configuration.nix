@@ -30,8 +30,11 @@
   services.openssh.enable = true;
   services.tailscale = {
     enable = true;
-    extraUpFlags = [ "--ssh" ];
+    extraUpFlags = [ "--ssh" "--advertise-routes=10.23.4.0/24" ];
+    useRoutingFeatures = "server";
+    authKeyFile = "/var/secrets/tailscale";
   };
+  virtualisation.docker.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
