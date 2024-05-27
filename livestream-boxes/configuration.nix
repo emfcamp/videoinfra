@@ -57,6 +57,8 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+  hardware.decklink.enable = true;
   virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -70,8 +72,6 @@
       ffmpeg
     ];
   };
-
-  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
