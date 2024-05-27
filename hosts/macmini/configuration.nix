@@ -1,6 +1,5 @@
-{config, pkgs, ...}: {
-  imports =
-    [ ./hardware-configuration.nix ];
+{ config, pkgs, ... }: {
+  imports = [ ./hardware-configuration.nix ];
 
   boot.loader.systemd-boot.enable = true;
   nixpkgs.config.allowUnfree = true;
@@ -20,12 +19,7 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    git
-    htop
-    vim
-    wget
-  ];
+  environment.systemPackages = with pkgs; [ git htop vim wget ];
 
   services.openssh.enable = true;
   services.tailscale = {

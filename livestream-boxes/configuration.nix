@@ -5,10 +5,9 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -37,11 +36,9 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # Enable the Plasma 5 Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
-  
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -57,17 +54,17 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   hardware.decklink.enable = true;
   virtualisation.docker.enable = true;
 
   networking = {
-    interfaces.eth0.ipv4.addresses = [ {
+    interfaces.eth0.ipv4.addresses = [{
       address = "172.31.152.107"; # blue
       # address = "172.31.152.117"; # yellow
       # address = "172.31.152.127"; # green
       prefixLength = 24;
-    } ];
+    }];
 
     hostName = "livestream-blue";
     # hostName = "livestream-yellow";
@@ -78,12 +75,7 @@
   users.users.voc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ]; # Enable ‘sudo’ for the user.
-    packages = with pkgs; [
-      firefox
-      tree
-      flatpak
-      ffmpeg
-    ];
+    packages = with pkgs; [ firefox tree flatpak ffmpeg ];
   };
 
   # List packages installed in system profile. To search, run:

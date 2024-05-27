@@ -3,14 +3,13 @@
 with lib;
 let
   cfg = config.services.irccat;
-  format = pkgs.formats.json {};
+  format = pkgs.formats.json { };
   cfgFile = format.generate "config.json" cfg.config;
-in
-{
+in {
   options = {
     services.irccat = {
       enable = mkEnableOption (lib.mdDoc "Irccat irc event sender");
-      package = mkPackageOption pkgs "irccat" {};
+      package = mkPackageOption pkgs "irccat" { };
       config = mkOption {
         type = types.submodule {
           freeformType = format.type;

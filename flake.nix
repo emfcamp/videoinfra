@@ -14,33 +14,29 @@
           # "${nixos}/nixos/modules/installer/cd-dvd/installation-cd-minimal.nix"
           ./hosts/macmini/configuration.nix
           ./irccat.nix
-          ({ pkgs, ... }: let
-            irccatPort = 6969;
-          in {
-            environment.systemPackages = [ pkgs.vim ];
-            services.sshd.enable = true;
-            services.tailscale = {
-              enable = true;
-              extraUpFlags = [ "--ssh" ];
-            };
-            services.irccat = {
-              enable = true;
-              package = pkgs.irccat.overrideAttrs {
-                src = irccat;
+          ({ pkgs, ... }:
+            let irccatPort = 6969;
+            in {
+              environment.systemPackages = [ pkgs.vim ];
+              services.sshd.enable = true;
+              services.tailscale = {
+                enable = true;
+                extraUpFlags = [ "--ssh" ];
               };
-              config = {
-                irc.server = "irc.libera.chat:6697";
-                irc.nick = "sru-bot";
-                irc.channels = "#emfcamp-video";
-                http = {
-		  listen = "localhost:${toString irccatPort}";
-                  listeners.github = {
-                    default_channel = "#emfcamp-video";
+              services.irccat = {
+                enable = true;
+                package = pkgs.irccat.overrideAttrs { src = irccat; };
+                config = {
+                  irc.server = "irc.libera.chat:6697";
+                  irc.nick = "sru-bot";
+                  irc.channels = "#emfcamp-video";
+                  http = {
+                    listen = "localhost:${toString irccatPort}";
+                    listeners.github = { default_channel = "#emfcamp-video"; };
                   };
                 };
               };
-            };
-          })
+            })
         ];
       };
     };
