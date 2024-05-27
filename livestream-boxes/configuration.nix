@@ -61,6 +61,19 @@
   hardware.decklink.enable = true;
   virtualisation.docker.enable = true;
 
+  networking = {
+    interfaces.eth0.ipv4.addresses = [ {
+      address = "172.31.152.107"; # blue
+      # address = "172.31.152.117"; # yellow
+      # address = "172.31.152.127"; # green
+      prefixLength = 24;
+    } ];
+
+    hostName = "livestream-blue";
+    # hostName = "livestream-yellow";
+    # hostName = "livestream-green";
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.voc = {
     isNormalUser = true;
