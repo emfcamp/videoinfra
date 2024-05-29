@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 { config, lib, pkgs, ... }:
 
 {
@@ -18,8 +14,16 @@
 
   services.xserver.enable = true;
 
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.desktopManager.plasma5.enable = true;
+
+
+services.xrdp.enable = true;
+services.xrdp.defaultWindowManager = "startplasma-x11";
+services.xrdp.openFirewall = true;
+hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
+nixpkgs.config.nvidia.acceptLicense = true;
+services.xserver.videoDrivers = ["nvidia"];
 
   sound.enable = true;
   services.pipewire = {
@@ -41,7 +45,12 @@
   networking.defaultGateway = "172.31.152.1";
   networking.nameservers = [ "8.8.8.8" ];
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Poke hole in 3389 for rdp
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 3389 ];
+  };
+
   users.users.voc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "audio" ];
@@ -50,7 +59,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim wget git firefox ];
+  environment.systemPackages = with pkgs; [ vim wget git firefox pkgs.gnome.gnome-remote-desktop ];
 
   services.openssh.enable = true;
   boot.initrd.network.ssh.enable = true;
