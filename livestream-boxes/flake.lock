@@ -1,0 +1,125 @@
+{
+  "nodes": {
+    "ajantv2": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": "nixpkgs",
+        "ntv2-gst-src": "ntv2-gst-src",
+        "ntv2-src": "ntv2-src"
+      },
+      "locked": {
+        "lastModified": 1715778181,
+        "narHash": "sha256-gfq4GKHUZzd8F3QaUW2s+k8+bmLWETM/TWOwdlLGn18=",
+        "ref": "refs/heads/main",
+        "rev": "6d1961cbbd2592f180342b54d4ee5c627ecf4eab",
+        "revCount": 20,
+        "type": "git",
+        "url": "https://git.hacksrus.org/Streams-R-Us/ajantv2-nix.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.hacksrus.org/Streams-R-Us/ajantv2-nix.git"
+      }
+    },
+    "flake-utils": {
+      "inputs": {
+        "systems": "systems"
+      },
+      "locked": {
+        "lastModified": 1694529238,
+        "narHash": "sha256-zsNZZGTGnMOf9YpHKJqMSsa0dXbfmxeoJ7xHlrt+xmY=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "ff7b65b44d01cf9ba6a71320833626af21126384",
+        "type": "github"
+      },
+      "original": {
+        "id": "flake-utils",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs": {
+      "locked": {
+        "lastModified": 1694499547,
+        "narHash": "sha256-R7xMz1Iia6JthWRHDn36s/E248WB1/je62ovC/dUVKI=",
+        "path": "/nix/store/zxh6mqr25a59giy1a0ca37njv92lv9hy-source",
+        "rev": "e5f018cf150e29aac26c61dac0790ea023c46b24",
+        "type": "path"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "type": "indirect"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1716633019,
+        "narHash": "sha256-xim1b5/HZYbWaZKyI7cn9TJCM6ewNVZnesRr00mXeS4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9d29cd266cebf80234c98dd0b87256b6be0af44e",
+        "type": "github"
+      },
+      "original": {
+        "id": "nixpkgs",
+        "ref": "nixos-23.11",
+        "type": "indirect"
+      }
+    },
+    "ntv2-gst-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1692893804,
+        "narHash": "sha256-90TdrsnO5LatLD4dwivOnZG4tGJmNs2tdAsrL7eQF8g=",
+        "owner": "aja-video",
+        "repo": "ntv2-gst",
+        "rev": "33d3a4957088e49ccecd9efa577b87bb0492f738",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aja-video",
+        "repo": "ntv2-gst",
+        "type": "github"
+      }
+    },
+    "ntv2-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1662565853,
+        "narHash": "sha256-rXjKDhQcZwAxsMjCoL21gpWeLWyIXyK/1y+78mhKgeo=",
+        "owner": "aja-video",
+        "repo": "ntv2",
+        "rev": "3a1e91f740e36e43a1ec74ff446a097330e87220",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aja-video",
+        "repo": "ntv2",
+        "type": "github"
+      }
+    },
+    "root": {
+      "inputs": {
+        "ajantv2": "ajantv2",
+        "nixpkgs": "nixpkgs_2"
+      }
+    },
+    "systems": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    }
+  },
+  "root": "root",
+  "version": 7
+}
