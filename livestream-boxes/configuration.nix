@@ -45,7 +45,7 @@
   users.users.voc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "audio" ];
-    packages = with pkgs; [ firefox tree flatpak ffmpeg ];
+    packages = with pkgs; [ firefox tree flatpak ffmpeg htop obs-studio ];
   };
 
   # List packages installed in system profile. To search, run:
