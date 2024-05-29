@@ -28,7 +28,6 @@
     pulse.enable = true;
   };
   hardware.pulseaudio.enable = false;
-    
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -64,12 +63,7 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    vim
-    wget
-    git
-    firefox
-  ];
+  environment.systemPackages = with pkgs; [ vim wget git firefox ];
 
   services.openssh.enable = true;
   boot.initrd.network.ssh.enable = true;
