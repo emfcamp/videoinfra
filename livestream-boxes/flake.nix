@@ -13,6 +13,7 @@
             ajantv2.nixosModules.default
             ({ config, lib, pkgs, ... }: {
               imports = [ ./configuration.nix ];
+              ntv2.enable = true;
               networking = {
                 hostName = hostname;
                 interfaces.eth0.ipv4.addresses = [{
