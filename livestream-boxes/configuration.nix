@@ -55,6 +55,8 @@
   # services.xserver.libinput.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+
   hardware.decklink.enable = true;
   virtualisation.docker.enable = true;
 
