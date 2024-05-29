@@ -101,7 +101,7 @@
   services.openssh.enable = true;
 
   # Start ssh during initrd boot
-  boot.initrd.network.ssh.enable
+  boot.initrd.network.ssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
