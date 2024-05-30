@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }:
-
-{
+let home = "/home/voc";
+in {
   imports = [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -17,10 +17,10 @@
   services.xserver.displayManager.sddm.enable = true;
   services.xserver.desktopManager.plasma5.enable = true;
 
-
-hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
-nixpkgs.config.nvidia.acceptLicense = true;
-services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.package =
+    config.boot.kernelPackages.nvidiaPackages.legacy_390;
+  nixpkgs.config.nvidia.acceptLicense = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   sound.enable = true;
   services.pipewire = {
@@ -42,15 +42,58 @@ services.xserver.videoDrivers = ["nvidia"];
   users.users.voc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "audio" ];
-    packages = with pkgs; [ firefox tree flatpak ffmpeg htop obs-studio ];
+    packages = with pkgs; [
+      firefox
+      tree
+      flatpak
+      ffmpeg
+      htop
+      obs-studio
+      tigervnc
+    ];
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim wget git firefox tigervnc ];
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    git
+    firefox
+    pkgs.xorg.xinit
+  ];
 
   services.openssh.enable = true;
   boot.initrd.network.ssh.enable = true;
+
+  # systemd service for vnc server
+  systemd.services.vncserver = {
+    enable = true;
+    environment = {
+      PATH = pkgs.lib.mkForce
+        "/run/wrappers/bin:${home}/.nix-profile/bin:/nix/profile/bin:${home}/.local/state/nix/profile/bin:/etc/profiles/per-user/user/bin:/nix/var/nix/profiles/default/bin:/run/current-system/sw/bin";
+    };
+    unitConfig = {
+      Description = "Remote desktop service (VNC)";
+      After = "syslog.target network.target";
+    };
+
+    serviceConfig = {
+      Type = "simple";
+      User = "user";
+      WorkingDirectory = "${home}";
+
+      ExecStartPre =
+        "/bin/sh -c '${pkgs.tigervnc}/bin/vncserver -kill :1 > /dev/null 2>&1 || :'";
+      ExecStart =
+        "${pkgs.xorg.xinit}/bin/xinit ${home}/.vnc/xstartup -- ${pkgs.tigervnc}/bin/Xvnc :1 -interface 127.0.0.1 -rfbauth ${home}/.vnc/passwd";
+      ExecStop = "${pkgs.tigervnc}/bin/vncserver -kill :1";
+
+    };
+
+    wantedBy = [ "multi-user.target" ];
+
+  };
 
   # This option defines the first version of NixOS you have installed on this particular machine,
   # and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
