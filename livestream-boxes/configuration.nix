@@ -18,9 +18,6 @@
   services.xserver.desktopManager.plasma5.enable = true;
 
 
-services.xrdp.enable = true;
-services.xrdp.defaultWindowManager = "startplasma-x11";
-services.xrdp.openFirewall = true;
 hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.legacy_390;
 nixpkgs.config.nvidia.acceptLicense = true;
 services.xserver.videoDrivers = ["nvidia"];
@@ -33,9 +30,6 @@ services.xserver.videoDrivers = ["nvidia"];
   };
   hardware.pulseaudio.enable = false;
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
 
@@ -45,12 +39,6 @@ services.xserver.videoDrivers = ["nvidia"];
   networking.defaultGateway = "172.31.152.1";
   networking.nameservers = [ "8.8.8.8" ];
 
-  # Poke hole in 3389 for rdp
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 3389 ];
-  };
-
   users.users.voc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" "audio" ];
@@ -59,7 +47,7 @@ services.xserver.videoDrivers = ["nvidia"];
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [ vim wget git firefox pkgs.gnome.gnome-remote-desktop ];
+  environment.systemPackages = with pkgs; [ vim wget git firefox tigervnc ];
 
   services.openssh.enable = true;
   boot.initrd.network.ssh.enable = true;
